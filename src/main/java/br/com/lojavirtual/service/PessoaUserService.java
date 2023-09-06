@@ -1,6 +1,7 @@
 package br.com.lojavirtual.service;
 
 import br.com.lojavirtual.dto.CepDTO;
+import br.com.lojavirtual.dto.ConsultaCnpjDto;
 import br.com.lojavirtual.model.PessoaFisica;
 import br.com.lojavirtual.model.PessoaJuridica;
 import br.com.lojavirtual.model.Usuario;
@@ -141,5 +142,9 @@ public class PessoaUserService {
 
     public CepDTO consultaCep(String cep){
         return new RestTemplate().getForEntity("https://viacep.com.br/ws/"+ cep +"/json/", CepDTO.class).getBody();
+    }
+
+    public ConsultaCnpjDto consultaCnpjReceitaWS(String cnpj){
+        return new RestTemplate().getForEntity("https://receitaws.com.br/v1/cnpj/"+ cnpj, ConsultaCnpjDto.class).getBody();
     }
 }

@@ -2,6 +2,7 @@ package br.com.lojavirtual.controller;
 
 import br.com.lojavirtual.ExceptionJava;
 import br.com.lojavirtual.dto.CepDTO;
+import br.com.lojavirtual.dto.ConsultaCnpjDto;
 import br.com.lojavirtual.enums.TipoPessoa;
 import br.com.lojavirtual.model.Endereco;
 import br.com.lojavirtual.model.PessoaFisica;
@@ -75,6 +76,13 @@ public class PessoaController {
     public ResponseEntity<CepDTO> consultaCep(@PathVariable("cep") String cep){
         return new ResponseEntity<CepDTO>(pessoaUserService.consultaCep(cep), HttpStatus.OK);
     }
+
+    @ResponseBody
+    @GetMapping(value = "**/consultaCnpjReceitaWs/{cnpj}")
+    public ResponseEntity<ConsultaCnpjDto> consultaCnpjReceitaWs(@PathVariable("cnpj") String cnpj){
+        return new ResponseEntity<ConsultaCnpjDto>(pessoaUserService.consultaCnpjReceitaWS(cnpj), HttpStatus.OK);
+    }
+
 
     /*end-point é microsservicos é um API*/
     @ResponseBody

@@ -1,7 +1,6 @@
 package br.com.lojavirtual.repository;
 
 import br.com.lojavirtual.model.PessoaFisica;
-import br.com.lojavirtual.model.PessoaJuridica;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
