@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -56,8 +58,8 @@ public class Produto implements Serializable {
     private BigDecimal valorVenda = BigDecimal.ZERO;
 
     @Column(nullable = false)
-    private Integer QtdEstoque = 0;
-    private Integer QtdeAlertaEstoque = 0;
+    private Integer qtdEstoque = 0;
+    private Integer qtdeAlertaEstoque = 0;
     private String linkYoutube;
     private Boolean aletaQtdeEstoque = Boolean.FALSE;
     private Integer qtdClique = 0;
@@ -77,17 +79,15 @@ public class Produto implements Serializable {
     @JoinColumn(name = "marca_produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "marca_produto_id_fk"))
     private MarcaProduto marcaProduto = new MarcaProduto();
 
-    @NotNull(message = "A Nota Item Produto deve ser informaado")
-    @ManyToOne(targetEntity = NotaItemProduto.class)
-    @JoinColumn(name = "nota_item_produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_item_produto_id_fk"))
-    private NotaItemProduto notaItemProduto = new NotaItemProduto();
+    @OneToMany(mappedBy = "produto", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ImagemProduto> imagens = new ArrayList<ImagemProduto>();
 
-    public NotaItemProduto getNotaItemProduto() {
-        return notaItemProduto;
+    public List<ImagemProduto> getImagens() {
+        return imagens;
     }
 
-    public void setNotaItemProduto(NotaItemProduto notaItemProduto) {
-        this.notaItemProduto = notaItemProduto;
+    public void setImagens(List<ImagemProduto> imagens) {
+        this.imagens = imagens;
     }
 
     public MarcaProduto getMarcaProduto() {
@@ -196,19 +196,19 @@ public class Produto implements Serializable {
     }
 
     public Integer getQtdEstoque() {
-        return QtdEstoque;
+        return qtdEstoque;
     }
 
     public void setQtdEstoque(Integer qtdEstoque) {
-        QtdEstoque = qtdEstoque;
+        qtdEstoque = qtdEstoque;
     }
 
     public Integer getQtdeAlertaEstoque() {
-        return QtdeAlertaEstoque;
+        return qtdeAlertaEstoque;
     }
 
     public void setQtdeAlertaEstoque(Integer qtdeAlertaEstoque) {
-        QtdeAlertaEstoque = qtdeAlertaEstoque;
+        qtdeAlertaEstoque = qtdeAlertaEstoque;
     }
 
     public String getLinkYoutube() {

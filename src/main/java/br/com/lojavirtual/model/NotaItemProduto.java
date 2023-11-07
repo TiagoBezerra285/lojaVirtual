@@ -1,5 +1,6 @@
 package br.com.lojavirtual.model;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,12 +14,13 @@ public class NotaItemProduto implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nota_item_produto")
     private Long id;
 
+    //@Size(min = 1, message = "Informe a quantidade do produto")
     @Column(nullable = false)
     private Double quantidade;
 
     @ManyToOne
     @JoinColumn(name = "nota_fiscal_compra_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_fiscal_compra_fk"))
-    private notaFiscalCompra notaFiscalCompra;
+    private NotaFiscalCompra notaFiscalCompra;
 
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
@@ -52,11 +54,11 @@ public class NotaItemProduto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public br.com.lojavirtual.model.notaFiscalCompra getNotaFiscalCompra() {
+    public NotaFiscalCompra getNotaFiscalCompra() {
         return notaFiscalCompra;
     }
 
-    public void setNotaFiscalCompra(br.com.lojavirtual.model.notaFiscalCompra notaFiscalCompra) {
+    public void setNotaFiscalCompra(NotaFiscalCompra notaFiscalCompra) {
         this.notaFiscalCompra = notaFiscalCompra;
     }
 
